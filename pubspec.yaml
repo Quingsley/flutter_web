@@ -1,0 +1,38 @@
+name: portfolio
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_animate: ^4.1.1+1
+  flutter_riverpod: ^2.3.6
+  go_router: ^7.0.1
+  rive: ^0.10.4
+  url_launcher: ^6.1.11
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+fonts:
+  - family: PersonalPortfolioIcons
+    fonts:
+      - asset: assets/fonts/PersonalPortfolioIcons.ttf
+  - family: Product Sans
+    fonts:
+      - asset: assets/fonts/Product Sans Regular.ttf
+      - asset: assets/fonts/Product Sans Bold.ttf
+        weight: 900
+      - asset: assets/fonts/Product Sans Italic.ttf
+        style: italic
+assets:
+  - assets/anims/
