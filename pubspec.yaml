@@ -22,17 +22,16 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-fonts:
-  - family: PersonalPortfolioIcons
-    fonts:
-      - asset: assets/fonts/PersonalPortfolioIcons.ttf
-  - family: Product Sans
-    fonts:
-      - asset: assets/fonts/Product Sans Regular.ttf
-      - asset: assets/fonts/Product Sans Bold.ttf
-        weight: 900
-      - asset: assets/fonts/Product Sans Italic.ttf
-        style: italic
-assets:
-  - assets/anims/
+  assets:
+    - assets/anims/
+  fonts:
+    - family: PersonalPortfolioIcons
+      fonts:
+        - asset: assets/fonts/PersonalPortfolioIcons.ttf
+    - family: Product Sans
+      fonts:
+        - asset: assets/fonts/Product Sans Regular.ttf
+        - asset: assets/fonts/Product Sans Bold.ttf
+          weight: 900
+        - asset: assets/fonts/Product Sans Italic.ttf
+          style: italic
