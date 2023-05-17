@@ -24,6 +24,7 @@ class LeftNavigationItemTile extends ConsumerWidget {
         child: Container(
           margin: const EdgeInsets.only(top: 20, bottom: 20),
           child: IconButton(
+            tooltip: item.label,
             iconSize: 30,
             onPressed: () {
               ref
