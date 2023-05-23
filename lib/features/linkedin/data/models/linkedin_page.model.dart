@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/styles/personal_portfolio_icons.dart';
 
 class LinkedInPageModel {
   final String title;
@@ -14,4 +15,14 @@ class LinkedInPageModel {
     required this.handle,
     required this.icon,
   });
+
+  factory LinkedInPageModel.fromDatabase(Map<String, dynamic> doc) {
+    return LinkedInPageModel(
+      title: doc['title'],
+      subtitle: doc['subtitle'],
+      url: doc['url'],
+      handle: doc['handle'],
+      icon: PersonalPortfolioIcons.iconMap[doc['icon']]!,
+    );
+  }
 }

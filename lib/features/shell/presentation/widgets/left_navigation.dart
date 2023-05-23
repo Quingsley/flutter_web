@@ -3,12 +3,27 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/features/navigation/presentation/providers/navigation_providers.dart';
 import 'package:portfolio/features/shell/presentation/widgets/left_navigation_item_tile.dart';
+import 'package:portfolio/shared/providers/shared_providers.dart';
 
-class LeftNavigation extends ConsumerWidget {
+class LeftNavigation extends ConsumerStatefulWidget {
   const LeftNavigation({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LeftNavigation> createState() => _LeftNavigationState();
+}
+
+class _LeftNavigationState extends ConsumerState<LeftNavigation> {
+  @override
+  void initState() {
+    super.initState();
+
+    ref.read(webLocalStorageProvider).initLocalStorage().then(
+          (_) => ref.read(navigationItemsViewModelProvider.notifier).init(),
+        );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var navItems = ref.watch(navigationItemsViewModelProvider);
     return Container(
       decoration: BoxDecoration(

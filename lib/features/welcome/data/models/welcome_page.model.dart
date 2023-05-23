@@ -12,4 +12,15 @@ class WelcomePageModel {
     required this.greetings,
     required this.name,
   });
+
+  factory WelcomePageModel.fromDatabase(Map<String, dynamic> doc) {
+    return WelcomePageModel(
+      title: doc['title'],
+      subTitle: doc['subtitle'],
+      imgPath: doc['imgPath'],
+      greetings:
+          (doc['greetings'] as List<dynamic>).map((e) => e.toString()).toList(),
+      name: doc['name'],
+    );
+  }
 }

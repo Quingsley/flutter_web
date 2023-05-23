@@ -5,3 +5,13 @@ enum BackgroundAnimations {
   github,
   web,
 }
+
+enum DatabaseCollections { pageContent }
+
+enum DatabaseDocs {
+  welcomePage,
+  twitterPage,
+  linkedInPage,
+  githubPage,
+  webPage
+}

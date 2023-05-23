@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/styles/personal_portfolio_icons.dart';
 
 class TwitterPageModel {
   final IconData icon;
@@ -14,4 +15,14 @@ class TwitterPageModel {
     required this.handle,
     required this.url,
   });
+
+  factory TwitterPageModel.fromDatabase(Map<String, dynamic> doc) {
+    return TwitterPageModel(
+      icon: PersonalPortfolioIcons.iconMap[doc['icon']]!,
+      title: doc['title'],
+      subtitle: doc['subtitle'],
+      handle: doc['handle'],
+      url: doc['url'],
+    );
+  }
 }

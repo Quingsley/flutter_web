@@ -10,8 +10,17 @@ class LeftNavigationViewModel extends StateNotifier<List<LeftNavigationItem>> {
   LeftNavigationViewModel(List<LeftNavigationItem> items, this.ref)
       : super([]) {
     state = items;
-    var item = state.first;
-    selectNavItem(item);
+    // var item = state.first;
+    // selectNavItem(item);
+  }
+  void init() {
+    var selectedNaveRoute = ref.read(webLocalStorageProvider).getSelectedNav();
+    if (selectedNaveRoute.isNotEmpty) {
+      var item = state.where((i) => i.route == selectedNaveRoute).first;
+      selectNavItem(item);
+    } else {
+      selectNavItem(state.first);
+    }
   }
 
   void selectNavItem(LeftNavigationItem item) {
@@ -22,6 +31,7 @@ class LeftNavigationViewModel extends StateNotifier<List<LeftNavigationItem>> {
         PersonalPortfolioColors.pageColor[item.route]!;
 
     ref.read(bgPageRouteProvider.notifier).state = item.route;
+    ref.read(webLocalStorageProvider).storeSelectedNav(item.route);
     state = [
       for (var element in state) element.copyWith(isSelected: item == element)
     ];

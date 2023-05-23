@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/styles/personal_portfolio_icons.dart';
 
 class GithubPageModel {
   final String title;
@@ -14,4 +15,13 @@ class GithubPageModel {
     required this.icon,
     required this.url,
   });
+  factory GithubPageModel.fromDatabase(Map<String, dynamic> doc) {
+    return GithubPageModel(
+      title: doc['title'],
+      subTitle: doc['subtitle'],
+      url: doc['url'],
+      handle: doc['handle'],
+      icon: PersonalPortfolioIcons.iconMap[doc['icon']]!,
+    );
+  }
 }
