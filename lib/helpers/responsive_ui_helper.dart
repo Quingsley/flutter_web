@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/features/github/presentation/responsiveness/github_page_responsive.config.dart';
 import 'package:portfolio/features/linkedin/presentation/responsiveness/linkedin_page_responsive.config.dart';
 import 'package:portfolio/features/twitter/presentation/responsiveness/twitter_page_responsive.config.dart';
 import 'package:portfolio/features/web/presentation/responsiveness/web_page_responsive.config.dart';
@@ -43,6 +44,8 @@ extension GetResponsiveUIConfig on BuildContext {
       case WebPageResponsiveConfig:
         configClass = WebPageResponsiveConfig.responsiveUI[device]!;
         break;
+      case GithubResposniveConfig:
+        configClass = GithubResposniveConfig.responsiveUI[device]!;
     }
     return configClass as T;
   }

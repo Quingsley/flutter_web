@@ -14,6 +14,7 @@ class GithubPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gitData = ref.watch(githubDataProvider);
+    var uiConfig = context.uiConfig<GithubResposniveConfig>();
     return gitData.when(
       data: (data) => SectionPageLayout(
         title: data.title,
@@ -21,6 +22,7 @@ class GithubPage extends ConsumerWidget {
         handle: data.handle,
         link: data.url,
         icon: data.icon,
+        uiConfig: uiConfig,
       ),
       error: (error, stackTrace) =>
           ErrorNotification(message: error.toString()),
@@ -41,6 +43,7 @@ class SectionPageLayout extends StatelessWidget {
     this.link,
     this.icon,
     this.otherText,
+    required this.uiConfig,
   });
 
   final String? title;
@@ -49,9 +52,9 @@ class SectionPageLayout extends StatelessWidget {
   final String? link;
   final IconData? icon;
   final String? otherText;
+  final GithubResposniveConfig uiConfig;
   @override
   Widget build(BuildContext context) {
-    var uiConfig = context.uiConfig<GithubResposniveConfig>();
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
