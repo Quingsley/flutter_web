@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/features/twitter/presentation/providers/twitter_page.providers.dart';
+import 'package:portfolio/features/twitter/presentation/responsiveness/twitter_page_responsive.config.dart';
+import 'package:portfolio/helpers/responsive_ui_helper.dart';
 import 'package:portfolio/shared/error_notification.dart';
 import 'package:portfolio/shared/widgets/custom_btn.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:portfolio/styles/colors.dart';
 
 class TwitterPage extends ConsumerWidget {
   const TwitterPage({super.key});
@@ -11,7 +14,7 @@ class TwitterPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final twitterData = ref.watch(twitterDataProvider);
-
+    var uiConfig = context.uiConfig<TwitterPageResponsiveConfig>();
     return twitterData.when(
       data: (tweetData) => Center(
         child: Column(
@@ -21,8 +24,8 @@ class TwitterPage extends ConsumerWidget {
           children: [
             Icon(
               tweetData.icon,
-              size: 100,
-              color: Colors.blue,
+              size: uiConfig.iconSize,
+              color: PersonalPortfolioColors.twitterIcon,
             )
                 .animate(
                   onPlay: (controller) => controller.repeat(
@@ -37,9 +40,9 @@ class TwitterPage extends ConsumerWidget {
                 ),
             Text(
               tweetData.title,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 60,
+                fontSize: uiConfig.titleSize,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -47,13 +50,10 @@ class TwitterPage extends ConsumerWidget {
             Text(
               tweetData.subtitle,
               style: TextStyle(
-                color: Colors.white.withOpacity(.25),
-                fontSize: 30,
+                color: PersonalPortfolioColors.twitterIcon,
+                fontSize: uiConfig.subtitleSize,
               ),
               textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 20,
             ),
             ContainerBtn(
               handle: tweetData.handle,

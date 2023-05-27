@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/features/twitter/presentation/responsiveness/twitter_page_responsive.config.dart';
+import 'package:portfolio/helpers/responsive_ui_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContainerBtn extends StatelessWidget {
@@ -12,6 +14,8 @@ class ContainerBtn extends StatelessWidget {
   final String handle;
   @override
   Widget build(BuildContext context) {
+    var uiConfig = TwitterPageResponsiveConfig
+        .responsiveUi[ResponsiveUIHelper.getDeviceType(context)]!;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -23,19 +27,20 @@ class ContainerBtn extends StatelessWidget {
           }
         },
         child: Container(
+          margin: uiConfig.buttonMargin,
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
             vertical: 8,
           ),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(.1),
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            borderRadius: const BorderRadius.all(Radius.circular(40)),
           ),
           child: Text(
             handle,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 20,
+              fontSize: uiConfig.buttonLabelSize,
             ),
             textAlign: TextAlign.center,
           ),

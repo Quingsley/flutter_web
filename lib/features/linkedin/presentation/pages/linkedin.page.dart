@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/features/linkedin/presentation/providers/linkedin.providers.dart';
+import 'package:portfolio/features/linkedin/presentation/responsiveness/linkedin_page_responsive.config.dart';
+import 'package:portfolio/helpers/responsive_ui_helper.dart';
 import 'package:portfolio/shared/error_notification.dart';
 import 'package:portfolio/shared/widgets/custom_btn.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:portfolio/styles/colors.dart';
 
 class LinkedInPage extends ConsumerWidget {
   const LinkedInPage({super.key});
@@ -11,6 +14,7 @@ class LinkedInPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(linkedInDataProvider);
+    var uiConfig = context.uiConfig<LinkedInResponsiveConfig>();
     return data.when(
       data: (linkedInData) => Center(
         child: Column(
@@ -20,27 +24,24 @@ class LinkedInPage extends ConsumerWidget {
           children: [
             Icon(
               linkedInData.icon,
-              size: 100,
-              color: Colors.blue,
+              size: uiConfig.iconSize,
+              color: PersonalPortfolioColors.linkedInIcon,
             ),
             Text(
               linkedInData.title,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 60,
+                fontSize: uiConfig.titleSize,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               linkedInData.subtitle,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 60,
+                fontSize: uiConfig.subtitleSize,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             ContainerBtn(
               link: linkedInData.url,

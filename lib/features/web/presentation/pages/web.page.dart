@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/features/web/presentation/providers/web_page.providers.dart';
+import 'package:portfolio/features/web/presentation/responsiveness/web_page_responsive.config.dart';
+import 'package:portfolio/helpers/responsive_ui_helper.dart';
 import 'package:portfolio/shared/error_notification.dart';
 import 'package:portfolio/shared/widgets/custom_btn.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:portfolio/styles/colors.dart';
 
 class WebPage extends ConsumerWidget {
   const WebPage({super.key});
@@ -11,7 +14,7 @@ class WebPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final webData = ref.watch(webPageDataProvider);
-
+    var uiConfig = context.uiConfig<WebPageResponsiveConfig>();
     return webData.when(
       data: (data) => Center(
         child: Column(
@@ -21,27 +24,24 @@ class WebPage extends ConsumerWidget {
           children: [
             Icon(
               data.icon,
-              size: 100,
-              color: Colors.white.withOpacity(.25),
+              size: uiConfig.iconSize,
+              color: PersonalPortfolioColors.webIcon,
             ),
             Text(
               data.title,
-              style: const TextStyle(
-                  fontSize: 60,
+              style: TextStyle(
+                  fontSize: uiConfig.titleSize,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             Text(
               data.subTitle,
-              style: const TextStyle(
-                  fontSize: 60,
+              style: TextStyle(
+                  fontSize: uiConfig.subtitleSize,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 20,
             ),
             ContainerBtn(link: data.url, handle: data.handle),
           ]

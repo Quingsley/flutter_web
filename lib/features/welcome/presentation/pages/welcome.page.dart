@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/features/welcome/presentation/providers/welcome_page.providers.dart';
+import 'package:portfolio/features/welcome/presentation/responsiveness/welcome_page_responsive.config.dart';
 import 'package:portfolio/features/welcome/presentation/widgets/greetings_label.dart';
+import 'package:portfolio/helpers/responsive_ui_helper.dart';
 import 'package:portfolio/shared/error_notification.dart';
 import 'package:portfolio/styles/colors.dart';
 import 'package:portfolio/styles/personal_portfolio_icons.dart';
@@ -14,6 +16,7 @@ class WelcomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var uiConfig = context.uiConfig<WelcomePageResponsiveConfig>();
     var welcomeDataAsync = ref.watch(welcomeProvider);
     return welcomeDataAsync.when(
       data: (welcomeData) => Center(
@@ -21,17 +24,19 @@ class WelcomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            Flex(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
+              direction: uiConfig.headerAxis,
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: uiConfig.imageSize,
+                  height: uiConfig.imageSize,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: PersonalPortfolioColors.welcomePrimary,
-                      width: 8,
+                      width: uiConfig.imageBorderSize,
                     ),
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -39,12 +44,10 @@ class WelcomePage extends ConsumerWidget {
                         fit: BoxFit.cover),
                   ),
                 ),
-                const SizedBox(
-                  width: 40,
-                ),
-                const Icon(
+                uiConfig.headerGap,
+                Icon(
                   PersonalPortfolioIcons.wave,
-                  size: 90,
+                  size: uiConfig.handSize,
                   color: PersonalPortfolioColors.welcomeIcon,
                 )
                     .animate(
@@ -62,23 +65,29 @@ class WelcomePage extends ConsumerWidget {
             const GreetingsLabel(),
             Text.rich(
               TextSpan(
-                  style: const TextStyle(fontSize: 100, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: uiConfig.titleSize, color: Colors.white),
                   children: [
                     const TextSpan(text: "I'm "),
                     TextSpan(
-                        text: welcomeData.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                      text: welcomeData.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ]),
               textAlign: TextAlign.center,
             ),
-            Row(
+            Flex(
+              direction: uiConfig.headerAxis,
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(PersonalPortfolioIcons.badge,
-                    color: PersonalPortfolioColors.welcomePrimary, size: 80),
-                const SizedBox(width: 20),
+                Icon(
+                  PersonalPortfolioIcons.badge,
+                  color: PersonalPortfolioColors.welcomePrimary,
+                  size: uiConfig.badgeSize,
+                ),
+                uiConfig.subtitleGap,
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,12 +95,14 @@ class WelcomePage extends ConsumerWidget {
                   children: [
                     Text(welcomeData.title,
                         textAlign: TextAlign.center,
-                        style:
-                            const TextStyle(fontSize: 40, color: Colors.white)),
+                        style: TextStyle(
+                            fontSize: uiConfig.subTitleSize,
+                            color: Colors.white)),
                     Text(welcomeData.subTitle,
                         textAlign: TextAlign.center,
-                        style:
-                            const TextStyle(fontSize: 40, color: Colors.white)),
+                        style: TextStyle(
+                            fontSize: uiConfig.subTitleSize,
+                            color: Colors.white)),
                   ],
                 )
               ],

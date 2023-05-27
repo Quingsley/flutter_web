@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/features/github/presentation/providers/github.providers.dart';
+import 'package:portfolio/features/github/presentation/responsiveness/github_page_responsive.config.dart';
+import 'package:portfolio/helpers/responsive_ui_helper.dart';
 import 'package:portfolio/shared/error_notification.dart';
 import 'package:portfolio/shared/widgets/custom_btn.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:portfolio/styles/colors.dart';
 
 class GithubPage extends ConsumerWidget {
   const GithubPage({super.key});
@@ -48,6 +51,7 @@ class SectionPageLayout extends StatelessWidget {
   final String? otherText;
   @override
   Widget build(BuildContext context) {
+    var uiConfig = context.uiConfig<GithubResposniveConfig>();
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -56,14 +60,14 @@ class SectionPageLayout extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 100,
-            color: Colors.white.withOpacity(.25),
+            size: uiConfig.iconSize,
+            color: PersonalPortfolioColors.githubIcon,
           ),
           Text(
             title ?? '',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 60,
+              fontSize: uiConfig.titleSize,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
@@ -72,12 +76,9 @@ class SectionPageLayout extends StatelessWidget {
             subtitle ?? '',
             style: TextStyle(
               color: Colors.white.withOpacity(.25),
-              fontSize: 30,
+              fontSize: uiConfig.subtitleSize,
             ),
             textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 20,
           ),
           ContainerBtn(
             handle: handle ?? '',
